@@ -38,4 +38,59 @@ You can delete resources
 * using the yaml files
 * by deleting the namespaces
 
+<h3> K8s Architecture </h3>
 
+![alt text](image.png)
+
+
+```
+kubectl api-resources #see all objects and their API versions
+```
+
+The Kubernetes control plan components 
+* controler Manager
+* Kube API server
+* etcd 
+* kube proxy 
+
+The Kubernetes Worker Nodes 
+* kubelet
+* container runtime
+* kube proxy 
+
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+<h3>Kubernetes Cluster Components  </h3>
+A Comprehensive Glossary of Kubernetes Cluster Components<br>
+Location in Cluster: Control Plane
+
+* Cloud Controller Manager: Connects a Kubernetes cluster to a cloud provider's API, managing cloud-specific resources and ensuring proper integration with the underlying infrastructure
+* etcd: A key-value store that saves all data about the state of the cluster; only the kube-apiserver can communicate directly with etcd
+* kube-apiserver: The kube-apiserver is a key component of Kubernetes that exposes the Kubernetes API, handles most requests, and manages interactions with the cluster by processing and validating API requests, making it essential for the cluster's operation
+* kube-controller-manager: Monitors the Kubernetes cluster's state, running processes to ensure the current state matches the desired state
+* kube-scheduler: Identifies a newly created pod that has not been assigned a worker node and assigns it to a specific node
+
+<h3> Location in Cluster: Worker Nodes </h3> 
+
+* Container Runtime: Pulls container images, creates and manages containers, and ensures they run properly and securely as directed by the Kubernetes control plane
+* kube-proxy: A network proxy that runs on each node in a Kubernetes cluster, maintaining network rules and enabling communication between pods and services within the node and the control plane, while also communicating directly with the kube-apiserver
+* kubelet: An agent that runs on each node in a Kubernetes cluster, ensuring containers in a pod are running and healthy while communicating with the API server in the control plane to maintain the desired state of the node
+
+Sucurity:
+* Update your Kubernetes versions regulary
+* scan your yaml manifest with a tool like synk
+* add security context info to your deployments
+
+Test your iac before deployment
+
+```
+synk iac test deployment.yaml
+```
